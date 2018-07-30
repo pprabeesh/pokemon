@@ -1,14 +1,21 @@
 'use strict';
 
 // Declare app level module which depends on views, and components
-angular.module('myApp', [
+var app= angular.module('pokemonApp', [
   'ngRoute',
-  'myApp.view1',
-  'myApp.view2',
-  'myApp.version'
+  'ngResource',
+  'pokemon.list',
+  'pokemon.service'
 ]).
 config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
   $locationProvider.hashPrefix('!');
 
-  $routeProvider.otherwise({redirectTo: '/view1'});
+  $routeProvider.otherwise({ redirectTo: '/pokelist'});
 }]);
+
+app.filter('startFrom', function () {
+  return function (input, start) {
+    start = +start; 
+    return input.slice(start);
+  }
+});

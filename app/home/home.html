@@ -1,0 +1,24 @@
+<div class="main">
+    <div class="header-class"> Pokemon Gallery </div>
+    <div class="body">
+        <div class="list-header"> Pokemon List </div>
+        <input ng-model="searchQuery" placeholder="Search" ng-change="currentPage=0"/>
+        <div class="pokemon-list">
+            <div ng-repeat="pokemon in pokemonList | filter:searchQuery | startFrom:currentPage*pageSize | limitTo:pageSize">
+                <div class="pokemon">
+                    <img ng-src="../assets/{{pokemon.id}}.png" />
+                    <span class="index"> #{{pokemon.id}}</span> 
+                    <span class="pokemon-name">{{pokemon.name}}</span>
+                </div>
+            </div>
+        </div>
+        <button ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
+            Previous
+        </button>
+        {{currentPage+1}}/{{numberOfPages()}}
+        <button ng-disabled="currentPage >= getData().length/pageSize - 1" ng-click="currentPage=currentPage+1">
+            Next
+        </button>
+    </div>
+
+</div>
